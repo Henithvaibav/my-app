@@ -20,6 +20,16 @@ pipeline{
       sh 'mvn clean package'
     }
   }
+        stage('Slack Notification') {
+            steps {
+            slackSend baseUrl: 'https://hooks.slack.com/services/', 
+                channel: 'myapp', 
+                color: 'good', message: 'welcome slack !!!', 
+                teamDomain: 'mailtoindrajith', 
+                tokenCredentialId: 'slack-myapp', 
+                username: 'mailtoindrajith'
+            }
+        }
 
    stage('Deploy war file tomcat') {
     steps {
