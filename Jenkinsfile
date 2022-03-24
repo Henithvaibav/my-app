@@ -15,20 +15,7 @@ pipeline {
 }
       }
   }
-    stage('Sonar Qube Status checks') {
-          timeout(time: 1, unit: 'HOURS') {
-              def qg = waitForQualityGate()
-              if (qg.status != 'OK') {
-                slackSend baseUrl: 'https://hooks.slack.com/services/', 
-                channel: 'myapp', 
-                color: 'danger', message: 'Mark this build as failure', 
-                teamDomain: 'mailtoindrajith', 
-                tokenCredentialId: 'slack-myapp', 
-                username: 'mailtoindrajith'
-                  error "Pipeline aborted due to quality gate failure: ${qg.status}"
-              }
-          }
-      }        
+    
     stage('Maven Build') {
     steps {
       sh 'mvn clean package'
