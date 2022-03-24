@@ -1,4 +1,4 @@
-pipeline{
+pipeline {
     agent any
     //tool name: 'Maven-3', type: 'maven'
     stages {
@@ -8,14 +8,14 @@ pipeline{
         git credentialsId: 'github-private-key', url: 'git@github.com:Henithvaibav/my-app.git'
     }
   }
-  stage('Sonar Qube'){
+  stage('Sonar Qube') {
       steps {
           withSonarQubeEnv('sonar-6') {
     sh 'mvn sonar:sonar'
 }
       }
   }
-    stage("Sonar Qube Status checks"){
+    stage('Sonar Qube Status checks') {
           timeout(time: 1, unit: 'HOURS') {
               def qg = waitForQualityGate()
               if (qg.status != 'OK') {
