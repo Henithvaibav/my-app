@@ -15,8 +15,7 @@ pipeline {
 }
       }
   }
-        stage('Sonar Qube Status checks') {
-            def qg = 
+        stage('Sonar Qube Status checks') { 
         steps {
           timeout(time: 1, unit: 'HOURS') {
               
