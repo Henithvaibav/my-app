@@ -19,7 +19,7 @@ pipeline {
         steps {
           timeout(time: 1, unit: 'HOURS') {
               def qg = waitForQualityGate()
-              if (qg.status != 'OK') {
+              if ("${qg.status}" != 'OK') {
                 slackSend baseUrl: 'https://hooks.slack.com/services/', 
                 channel: 'myapp', 
                 color: 'danger', message: 'Mark this build as failure', 
