@@ -16,9 +16,10 @@ pipeline {
       }
   }
         stage('Sonar Qube Status checks') {
+            def qg = waitForQualityGate()
         steps {
           timeout(time: 1, unit: 'HOURS') {
-              def qg = waitForQualityGate()
+              
               if ("${qg.status}" != 'OK') {
                 slackSend baseUrl: 'https://hooks.slack.com/services/', 
                 channel: 'myapp', 
